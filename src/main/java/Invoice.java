@@ -61,6 +61,15 @@ public class Invoice {
     this.paid = true;
   }
 
+  public double applyDiscount(double percentage) {
+    if (percentage <= 0 || percentage >= 100) {
+      throw new InvalidAmountException("No Discount under or above 0 and 100, was: " + percentage);
+    }
+    double result = amount * percentage / 100;
+    amount -= result;
+    return amount;
+  }
+
   @Override
   public String toString() {
     return getCustomerName()
